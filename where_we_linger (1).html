@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Where We Linger — Slow Travel, Food & Landscapes</title>
+
+  <!-- Google Fonts: Playfair Display (Headings), Montserrat (Subheadings & Body), Caveat / Reenie Beanie (Editorial Hand Notes) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Reenie+Beanie&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            deepOlive: '#3F4A3A',
+            softSage: '#A2AE97',
+            warmLinen: '#DCCDBA',
+            terracotta: '#C47A5A',
+            softEcru: '#E8E5DF',
+            darkCharcoal: '#2B2B2B',
+            parchmentBg: '#F8F6F2',
+            lightLinen: '#F2EFEB',
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['Montserrat', '-apple-system', 'sans-serif'],
+            script: ['"Reenie Beanie"', '"Caveat"', 'cursive'],
+            hand: ['"Caveat"', 'cursive'],
+          },
+          boxShadow: {
+            'editorial': '0 12px 35px -8px rgba(63, 74, 58, 0.12)',
+            'subtle': '0 4px 20px -2px rgba(43, 43, 43, 0.06)',
+            'frame': '0 0 0 1px #DCCDBA, 0 10px 28px -5px rgba(63, 74, 58, 0.15)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Base typography and smooth layout behaviors */
+    body {
+      background-color: #F8F6F2;
+      color: #2B2B2B;
+      font-family: 'Montserrat', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, .font-heading {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    /* Subheadings and labels */
+    .editorial-label {
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.68rem;
+      font-weight: 600;
+    }
+
+    /* Selection colors using Soft Sage and Deep Olive */
+    ::selection {
+      background-color: #DCCDBA;
+      color: #2B2B2B;
+    }
+
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F8F6F2;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #A2AE97;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3F4A3A;
+    }
+
+    /* Botanical divider decoration */
+    .botanical-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+    }
+    .botanical-line::before,
+    .botanical-line::after {
+      content: '';
+      height: 1px;
+      width: 5rem;
+      background-color: #DCCDBA;
+    }
+
+    /* Drop-cap for editorial article reader */
+    .story-dropcap::first-letter {
+      font-family: 'Playfair Display', serif;
+      float: left;
+      font-size: 4.4rem;
+      line-height: 0.8;
+      padding-right: 0.65rem;
+      padding-top: 0.2rem;
+      color: #3F4A3A;
+    }
+
+    /* Ambient noise & linen texture simulation */
+    .linen-texture {
+      background-image: radial-gradient(rgba(63, 74, 58, 0.035) 1px, transparent 0);
+      background-size: 18px 18px;
+    }
+
+    /* Map pulse pin */
+    @keyframes pin-glow {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(196, 122, 90, 0.4); }
+      50% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(196, 122, 90, 0); }
+    }
+    .pin-active-glow {
+      animation: pin-glow 2.5s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-parchmentBg text-darkCharcoal linen-texture selection:bg-warmLinen selection:text-deepOlive min-h-screen flex flex-col justify-between">
+
+  <!-- Top Editorial Header & Brand Bar -->
+  <header class="sticky top-0 z-40 bg-parchmentBg/95 backdrop-blur-md border-b border-warmLinen/60 transition-all duration-300">
+    <!-- Top Announcement Strip -->
+    <div class="bg-deepOlive text-softEcru text-[10px] tracking-[0.24em] font-sans uppercase py-1.5 px-4 text-center flex items-center justify-between border-b border-deepOlive/80">
+      <span class="hidden sm:inline-block font-light text-softSage">Food &bull; Travel &bull; Landscapes Between</span>
+      <span class="mx-auto sm:mx-0 font-medium">Stories of places worth staying for &mdash; Issue No. 14</span>
+      <div class="hidden sm:flex items-center gap-3">
+        <button onclick="toggleAudioAmbience()" id="ambience-btn" class="hover:text-white transition flex items-center gap-1 cursor-pointer">
+          <span class="w-1.5 h-1.5 rounded-full bg-softSage inline-block" id="ambience-indicator"></span>
+          <span id="ambience-text">Lake & Meadow Ambience: Off</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 py-5 flex items-center justify-between">
+      
+      <!-- Brand Logo / Emblem -->
+      <a href="javascript:void(0)" onclick="switchView('home')" class="group flex items-center gap-3">
+        <!-- Botanical arch motif matching the moodboard logo -->
+        <div class="w-10 h-10 rounded-full border border-warmLinen flex items-center justify-center bg-lightLinen/60 group-hover:border-deepOlive group-hover:bg-softSage/20 transition-all duration-300">
+          <svg class="w-5 h-5 text-deepOlive" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <!-- Arch & Olive Cypress -->
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" d="M4 20V10a8 8 0 1116 0v10" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3" d="M12 18V8m-2 3c1-2 3-2 4 0m-4 3c1-2 3-2 4 0" />
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-serif tracking-[0.22em] text-xl sm:text-2xl text-darkCharcoal uppercase font-normal group-hover:text-deepOlive transition-colors">
+            Where We Linger
+          </span>
+          <span class="font-script text-base text-terracotta -mt-1 tracking-normal font-normal">
+            stories of places worth staying for
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden md:flex items-center space-x-7 lg:space-x-9 text-darkCharcoal">
+        <a href="javascript:void(0)" onclick="switchView('home')" class="editorial-label text-deepOlive border-b-2 border-deepOlive pb-1">Home</a>
+        <a href="#vignettes" onclick="ensureHomeThenScroll('#vignettes')" class="editorial-label text-darkCharcoal/80 hover:text-deepOlive transition">Moodboard</a>
+        <a href="#stories" onclick="ensureHomeThenScroll('#stories')" class="editorial-label text-darkCharcoal/80 hover:text-deepOlive transition">Stories</a>
+        <a href="#themes" onclick="ensureHomeThenScroll('#themes')" class="editorial-label text-darkCharcoal/80 hover:text-deepOlive transition">Themes</a>
+        <a href="#places" onclick="ensureHomeThenScroll('#places')" class="editorial-label text-darkCharcoal/80 hover:text-deepOlive transition">Map</a>
+        <a href="javascript:void(0)" onclick="switchView('guides')" class="editorial-label text-darkCharcoal/80 hover:text-deepOlive transition">Guides</a>
+        <a href="javascript:void(0)" onclick="switchView('fieldnotes')" class="editorial-label text-terracotta hover:text-deepOlive transition">Field Notes</a>
+        <a href="javascript:void(0)" onclick="switchView('about')" class="editorial-label text-darkCharcoal/80 hover:text-deepOlive transition">About</a>
+      </nav>
+
+      <!-- Right Utility Actions -->
+      <div class="flex items-center gap-3">
+        <!-- Search Trigger -->
+        <button onclick="toggleSearchModal()" aria-label="Search articles" class="p-2 text-darkCharcoal/70 hover:text-deepOlive hover:bg-warmLinen/40 rounded-full transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+          </svg>
+        </button>
+
+        <!-- Newsletter quick-jump -->
+        <a href="#newsletter" onclick="ensureHomeThenScroll('#newsletter')" class="hidden lg:inline-block px-3.5 py-1.5 border border-deepOlive text-deepOlive hover:bg-deepOlive hover:text-softEcru editorial-label text-[10px] rounded-sm transition">
+          Join Dispatch
+        </a>
+
+        <!-- Mobile Drawer Hamburger -->
+        <button onclick="toggleMobileNav()" aria-label="Toggle menu" class="md:hidden p-2 text-deepOlive hover:bg-warmLinen/40 rounded">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Slide Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-warmLinen bg-lightLinen px-6 py-6 transition-all duration-300">
+      <div class="flex flex-col space-y-4">
+        <a href="javascript:void(0)" onclick="switchView('home'); toggleMobileNav();" class="editorial-label text-xs text-deepOlive">Home</a>
+        <a href="#vignettes" onclick="ensureHomeThenScroll('#vignettes'); toggleMobileNav();" class="editorial-label text-xs text-darkCharcoal">Atmosphere & Vignettes</a>
+        <a href="#stories" onclick="ensureHomeThenScroll('#stories'); toggleMobileNav();" class="editorial-label text-xs text-darkCharcoal">Latest Stories</a>
+        <a href="#places" onclick="ensureHomeThenScroll('#places'); toggleMobileNav();" class="editorial-label text-xs text-darkCharcoal">Interactive Map</a>
+        <a href="javascript:void(0)" onclick="switchView('guides'); toggleMobileNav();" class="editorial-label text-xs text-darkCharcoal">Guides Directory</a>
+        <a href="javascript:void(0)" onclick="switchView('fieldnotes'); toggleMobileNav();" class="editorial-label text-xs text-terracotta">Field Notes (Linen Journal)</a>
+        <a href="javascript:void(0)" onclick="switchView('about'); toggleMobileNav();" class="editorial-label text-xs text-darkCharcoal">About Theresa</a>
+        <a href="javascript:void(0)" onclick="switchView('article'); toggleMobileNav();" class="editorial-label text-xs text-deepOlive">Read: Afternoon Light in Positano</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main View Container -->
+  <main id="main-content" class="flex-grow">
+
+    <!-- ============================================================= -->
+    <!-- VIEW 1: HOME PAGE (Atmosphere, Mood Vignettes, Stories, Map) -->
+    <!-- ============================================================= -->
+    <div id="view-home" class="view-pane block">
+
+      <!-- Hero Section: Featuring the exact rustic open casement window overlooking the lake -->
+      <section class="relative h-[86vh] min-h-[580px] max-h-[820px] w-full overflow-hidden flex items-end">
+        <!-- Hero Photography matching Moodboard Tile 7: Rustic window open to peaceful misty lake with wrought-iron balcony chairs -->
+        <img 
+          src="https://images.unsplash.com/photo-1533105079780-92b9be482077?q=85&w=2000&auto=format&fit=crop" 
+          alt="Open rustic arched stone window overlooking morning mist on a tranquil northern Italian lake" 
+          class="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.9] contrast-[1.02] transform scale-[1.01] transition-transform duration-1000"
+          onerror="this.src='https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1800'"
+        />
+        
+        <!-- Refined Editorial Duotone Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-t from-deepOlive/90 via-deepOlive/40 to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-deepOlive/70 via-transparent to-transparent"></div>
+
+        <!-- Hero Content Overlay -->
+        <div class="relative max-w-7xl mx-auto px-6 sm:px-12 pb-16 sm:pb-20 w-full z-10 text-softEcru">
+          <div class="max-w-2xl">
+            <!-- Brand Tagline Badge -->
+            <div class="inline-flex items-center gap-2 mb-4 bg-deepOlive/60 backdrop-blur-sm border border-warmLinen/30 px-3.5 py-1.5 rounded-sm">
+              <span class="w-1.5 h-1.5 rounded-full bg-softSage"></span>
+              <span class="editorial-label text-[10px] tracking-[0.24em] text-warmLinen">Food &bull; Travel &bull; Landscape</span>
+            </div>
+
+            <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl font-normal tracking-tight text-parchmentBg leading-[1.05] mb-4 drop-shadow-sm">
+              Where<br>We Linger
+            </h1>
+
+            <p class="font-sans text-xs sm:text-sm uppercase tracking-[0.22em] text-warmLinen/90 mb-6 font-light max-w-lg leading-relaxed">
+              Stories of food, travel and the landscapes between.
+            </p>
+
+            <p class="font-script text-2xl sm:text-3xl text-softSage mb-8 tracking-wide font-normal">
+              &ldquo;stories of places worth staying for&rdquo;
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4">
+              <a href="#vignettes" class="inline-flex items-center gap-2 px-6 py-3.5 bg-warmLinen text-deepOlive hover:bg-parchmentBg hover:text-darkCharcoal transition duration-200 editorial-label text-xs rounded-sm font-semibold shadow-editorial">
+                <span>Explore The Moodboard</span>
+                <span>&rarr;</span>
+              </a>
+              <button onclick="switchView('article')" class="px-6 py-3.5 border border-warmLinen/60 text-softEcru hover:bg-warmLinen/15 transition duration-200 editorial-label text-xs rounded-sm">
+                Read Positano Story
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom subtle frame accent line -->
+        <div class="absolute bottom-0 inset-x-0 h-1 bg-warmLinen/40 z-20"></div>
+      </section>
+
+      <!-- Editorial Manifesto Section -->
+      <section class="py-20 sm:py-28 px-6 bg-parchmentBg border-b border-warmLinen/60">
+        <div class="max-w-3xl mx-auto text-center">
+          <span class="editorial-label text-softSage block mb-3">Our Core Philosophy</span>
+          <p class="font-serif text-2xl sm:text-3xl lg:text-[2.2rem] leading-relaxed text-darkCharcoal font-normal mb-8 italic">
+            &ldquo;We believe the best journeys aren&rsquo;t measured by how far we travel, but by the places that invite us to stay a little longer. Here you&rsquo;ll find thoughtful travel guides, memorable meals, beautiful landscapes and stories that celebrate a slower way of exploring the world.&rdquo;
+          </p>
+
+          <!-- Botanical Branch Flourish (SVG motif) -->
+          <div class="botanical-line text-softSage my-6">
+            <svg class="w-12 h-6 text-deepOlive/80" viewBox="0 0 100 40" fill="none" stroke="currentColor">
+              <path d="M10 20 Q 30 18, 50 20 T 90 20" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M30 19 C 28 12, 36 10, 39 16 C 35 17, 32 18, 30 19 Z" fill="#A2AE97" fill-opacity="0.4" stroke-width="1"/>
+              <path d="M48 20 C 47 13, 55 11, 58 17 C 54 18, 50 19, 48 20 Z" fill="#A2AE97" fill-opacity="0.4" stroke-width="1"/>
+              <path d="M40 21 C 42 27, 34 29, 31 23 C 35 22, 38 21, 40 21 Z" fill="#A2AE97" fill-opacity="0.4" stroke-width="1"/>
+              <path d="M60 21 C 62 28, 54 30, 51 24 C 55 23, 58 22, 60 21 Z" fill="#A2AE97" fill-opacity="0.4" stroke-width="1"/>
+              <circle cx="50" cy="20" r="1.8" fill="#3F4A3A"/>
+            </svg>
+          </div>
+
+          <!-- Handwritten Motto Signature from Moodboard -->
+          <div class="text-center">
+            <span class="font-script text-2xl text-terracotta">Thoughtful, slow, and intentional &mdash; celebrating the beauty of place.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- MOOD BOARD GALLERY: Exactly presenting the 8 imagery archetypes shown in the image -->
+      <section id="vignettes" class="py-20 sm:py-28 max-w-7xl mx-auto px-6 sm:px-10 border-b border-warmLinen/60">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-terracotta"></span>
+              <span class="editorial-label text-deepOlive">Visual Atmosphere & Curation</span>
+            </div>
+            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-darkCharcoal font-normal">
+              The Mood & Visual Identity
+            </h2>
+          </div>
+          <div class="max-w-md">
+            <p class="font-sans text-xs text-darkCharcoal/70 leading-relaxed">
+              Every photograph is chosen to echo earthy plaster, morning lake mist, handmade tableware, and sun-dappled cobblestones. Click any tile to inspect the field story notes.
+            </p>
+          </div>
+        </div>
+
+        <!-- 8 Vignettes Grid Matching the Brand Mood Board Layout -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <!-- 1. Positano Cliffside at Golden Hour -->
+          <article onclick="openVignetteModal(0)" class="group cursor-pointer bg-lightLinen/60 p-3 rounded-sm border border-warmLinen hover:border-terracotta transition-all duration-300 shadow-subtle flex flex-col">
+            <div class="relative aspect-square overflow-hidden rounded-sm bg-warmLinen mb-3">
+              <img 
+                src="https://images.unsplash.com/photo-1533105079780-92b9be482077?q=85&w=800&auto=format&fit=crop" 
+                alt="Golden hour over Positano cliffside pastel houses and sea" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+              <span class="absolute top-3 left-3 bg-parchmentBg/90 backdrop-blur-xs text-[9px] font-sans uppercase tracking-[0.2em] px-2 py-0.5 text-deepOlive font-medium rounded-xs">
+                Vignette I
+              </span>
+            </div>
+            <div class="flex flex-col flex-grow justify-between">
+              <div>
+                <span class="editorial-label text-[10px] text-terracotta">Campania &bull; Light</span>
+                <h3 class="font-serif text-lg text-darkCharcoal group-hover:text-deepOlive transition mb-1 leading-snug">
+                  Positano Golden Hour
+                </h3>
+                <p class="font-sans text-xs text-darkCharcoal/70 line-clamp-2 leading-relaxed">
+                  Steep pastel houses glowing amber as the evening sun descends into the blue Tyrrhenian.
+                </p>
+              </div>
+              <div class="pt-3 mt-3 border-t border-warmLinen/60 flex items-center justify-between">
+                <span class="font-script text-base text-deepOlive">afternoon warmth</span>
+                <span class="text-terracotta text-xs font-sans">&rarr;</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2. Sun-Dappled European Promenade with Benches -->
+          <article onclick="openVignetteModal(1)" class="group cursor-pointer bg-lightLinen/60 p-3 rounded-sm border border-warmLinen hover:border-terracotta transition-all duration-300 shadow-subtle flex flex-col">
+            <div class="relative aspect-square overflow-hidden rounded-sm bg-warmLinen mb-3">
+              <img 
+                src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=85&w=800&auto=format&fit=crop" 
+                alt="Sun-dappled tree-lined promenade with cast iron benches in southern Europe" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+              <span class="absolute top-3 left-3 bg-parchmentBg/90 backdrop-blur-xs text-[9px] font-sans uppercase tracking-[0.2em] px-2 py-0.5 text-deepOlive font-medium rounded-xs">
+                Vignette II
+              </span>
+            </div>
+            <div class="flex flex-col flex-grow justify-between">
+              <div>
+                <span class="editorial-label text-[10px] text-deepOlive">Landscape &bull; Stroll</span>
+                <h3 class="font-serif text-lg text-darkCharcoal group-hover:text-deepOlive transition mb-1 leading-snug">
+                  Dappled Promenade
+                </h3>
+                <p class="font-sans text-xs text-darkCharcoal/70 line-clamp-2 leading-relaxed">
+                  Cast iron benches underneath rows of plane trees, dappled shadows across white gravel.
+                </p>
+              </div>
+              <div class="pt-3 mt-3 border-t border-warmLinen/60 flex items-center justify-between">
+                <span class="font-script text-base text-deepOlive">quiet shade</span>
+                <span class="text-terracotta text-xs font-sans">&rarr;</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. Top-Down Linen Flat Lay with Artisanal Pasta & Wine -->
+          <article onclick="openVignetteModal(2)" class="group cursor-pointer bg-lightLinen/60 p-3 rounded-sm border border-warmLinen hover:border-terracotta transition-all duration-300 shadow-subtle flex flex-col">
+            <div class="relative aspect-square overflow-hidden rounded-sm bg-warmLinen mb-3">
+              <img 
+                src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=85&w=800&auto=format&fit=crop" 
+                alt="Overhead flat lay of handmade pasta, olive oil saucer, white wine glass on vintage linen" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+              <span class="absolute top-3 left-3 bg-parchmentBg/90 backdrop-blur-xs text-[9px] font-sans uppercase tracking-[0.2em] px-2 py-0.5 text-deepOlive font-medium rounded-xs">
+                Vignette III
+              </span>
+            </div>
+            <div class="flex flex-col flex-grow justify-between">
+              <div>
+                <span class="editorial-label text-[10px] text-terracotta">Culinary &bull; Table</span>
+                <h3 class="font-serif text-lg text-darkCharcoal group-hover:text-deepOlive transition mb-1 leading-snug">
+                  The Pasta Flat Lay
+                </h3>
+                <p class="font-sans text-xs text-darkCharcoal/70 line-clamp-2 leading-relaxed">
+                  Ceramic bowl of handmade tagliatelle, pressed virgin olive oil, cold Falanghina, wrinkled linen.
+                </p>
+              </div>
+              <div class="pt-3 mt-3 border-t border-warmLinen/60 flex items-center justify-between">
+                <span class="font-script text-base text-deepOlive">slow lunch</span>
+                <span class="text-terracotta text-xs font-sans">&rarr;</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4. Rolling Golden Tuscan Hills with Distant Cypress Ridge -->
+          <article onclick="openVignetteModal(3)" class="group cursor-pointer bg-lightLinen/60 p-3 rounded-sm border border-warmLinen hover:border-terracotta transition-all duration-300 shadow-subtle flex flex-col">
+            <div class="relative aspect-square overflow-hidden rounded-sm bg-warmLinen mb-3">
+              <img 
+                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=85&w=800&auto=format&fit=crop" 
+                alt="Rolling amber Tuscan hills with cypress silhouettes under hazy morning sunlight" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+              <span class="absolute top-3 left-3 bg-parchmentBg/90 backdrop-blur-xs text-[9px] font-sans uppercase tracking-[0.2em] px-2 py-0.5 text-deepOlive font-medium rounded-xs">
+                Vignette IV
+              </span>
+            </div>
+            <div class="flex flex-col flex-grow justify-between">
+              <div>
+                <span class="editorial-label text-[10px] text-softSage">Tuscany &bull; Horizon</span>
+                <h3 class="font-serif text-lg text-darkCharcoal group-hover:text-deepOlive transition mb-1 leading-snug">
+                  Cypress Ridges
+                </h3>
+                <p class="font-sans text-xs text-darkCharcoal/70 line-clamp-2 leading-relaxed">
+                  Amber wheat fields, distant stone farmsteads, and morning mist drifting across Val d’Orcia.
+                </p>
+              </div>
+              <div class="pt-3 mt-3 border-t border-warmLinen/60 flex items-center justify-between">
+                <span class="font-script text-base text-deepOlive">mist & cypress</span>
+                <span class="text-terracotta text-xs font-sans">&rarr;</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5. Terracotta Pottery & Olive Branches on Warm Plaster Wall -->
+          <article onclick="openVignetteModal(4)" class="group cursor-pointer bg-lightLinen/60 p-3 rounded-sm border border-warmLinen hover:border-terracotta transition-all duration-300 shadow-subtle flex flex-col">
+            <div class="relative aspect-square overflow-hidden rounded-sm bg-warmLinen mb-3">
+              <img 
+                src="https://images.unsplash.com/photo-1544025162-d76694265947?q=85&w=800&auto=format&fit=crop" 
+                alt="Earthenware terracotta clay vases with olive branch stems casting delicate shadows on limewashed wall" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+              <span class="absolute top-3 left-3 bg-parchmentBg/90 backdrop-blur-xs text-[9px] font-sans uppercase tracking-[0.2em] px-2 py-0.5 text-deepOlive font-medium rounded-xs">
+                Vignette V
+              </span>
+            </div>
+            <div class="flex flex-col flex-grow justify-between">
+              <div>
+                <span class="editorial-label text-[10px] text-terracotta">Materiality &bull; Earth</span>
+                <h3 class="font-serif text-lg text-darkCharcoal group-hover:text-deepOlive transition mb-1 leading-snug">
+                  Terracotta & Olive
+                </h3>
+                <p class="font-sans text-xs text-darkCharcoal/70 line-clamp-2 leading-relaxed">
+                  Clay urns, dry leaves, and soft sun shadows falling upon limewashed courtyard walls.
+                </p>
+              </div>
+              <div class="pt-3 mt-3 border-t border-warmLinen/60 flex items-center justify-between">
+                <span class="font-script text-base text-deepOlive">grounded earth</span>
+                <span class="text-terracotta text-xs font-sans">&rarr;</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 6. Vintage Linen Field Notes Journal & Fountain Pen -->
+          <article onclick="openVignetteModal(5)" class="group cursor-pointer bg-lightLinen/60 p-3 rounded-sm border border-warmLinen hover:border-terracotta transition-all duration-300 shadow-subtle flex flex-col">
+            <div class="relative aspect-square overflow-hidden rounded-sm bg-warmLinen mb-3">
+              <img 
+                src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=85&w=800&auto=format&fit=crop" 
+                alt="Tactile linen fabric covered field notes notebook with fountain pen" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+              <span class="absolute top-3 left-3 bg-parchmentBg/90 backdrop-blur-xs text-[9px] font-sans uppercase tracking-[0.2em] px-2 py-0.5 text-deepOlive font-medium rounded-xs">
+                Vignette VI
+              </span>
+            </div>
+            <div class="flex flex-col flex-grow justify-between">
+              <div>
+                <span class="editorial-label text-[10px] text-deepOlive">Journal &bull; Reflection</span>
+                <h3 class="font-serif text-lg text-darkCharcoal group-hover:text-deepOlive transition mb-1 leading-snug">
+                  Tactile Field Notes
+                </h3>
+                <p class="font-sans text-xs text-darkCharcoal/70 line-clamp-2 leading-relaxed">
+                  Hand-bound cloth notebooks, pressed botanical leaves, and fountain pen observations.
+                </p>
+              </div>
+              <div class="pt-3 mt-3 border-t border-warmLinen/60 flex items-center justify-between">
+                <span class="font-script text-base text-deepOlive">slow writing</span>
+                <span class="text-terracotta text-xs font-sans">&rarr;</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 7. Rustic Wooden Window Looking Out Across Lake & Mist -->
+          <article onclick="openVignetteModal(6)" class="group cursor-pointer bg-lightLinen/60 p-3 rounded-sm border border-warmLinen hover:border-terracotta transition-all duration-300 shadow-subtle flex flex-col">
+            <div class="relative aspect-square overflow-hidden rounded-sm bg-warmLinen mb-3">
+              <img 
+                src="https://images.unsplash.com/photo-1533105079780-92b9be482077?q=85&w=800&auto=format&fit=crop" 
+                alt="Rustic wooden casement open window overlooking lake mountains with morning coffee chairs" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+              <span class="absolute top-3 left-3 bg-parchmentBg/90 backdrop-blur-xs text-[9px] font-sans uppercase tracking-[0.2em] px-2 py-0.5 text-deepOlive font-medium rounded-xs">
+                Vignette VII
+              </span>
+            </div>
+            <div class="flex flex-col flex-grow justify-between">
+              <div>
+                <span class="editorial-label text-[10px] text-softSage">Sanctuary &bull; View</span>
+                <h3 class="font-serif text-lg text-darkCharcoal group-hover:text-deepOlive transition mb-1 leading-snug">
+                  The Lake Casement
+                </h3>
+                <p class="font-sans text-xs text-darkCharcoal/70 line-clamp-2 leading-relaxed">
+                  Weathered wooden shutters pushed wide to reveal the silent water and alpine breezes.
+                </p>
+              </div>
+              <div class="pt-3 mt-3 border-t border-warmLinen/60 flex items-center justify-between">
+                <span class="font-script text-base text-deepOlive">lingering gaze</span>
+                <span class="text-terracotta text-xs font-sans">&rarr;</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 8. Weathered Wooden Trail Signpost in Wildflower Meadow -->
+          <article onclick="openVignetteModal(7)" class="group cursor-pointer bg-lightLinen/60 p-3 rounded-sm border border-warmLinen hover:border-terracotta transition-all duration-300 shadow-subtle flex flex-col">
+            <div class="relative aspect-square overflow-hidden rounded-sm bg-warmLinen mb-3">
+              <img 
+                src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=85&w=800&auto=format&fit=crop" 
+                alt="Rustic weathered wooden walking trail sign pointing to Coast Path and Cafe amidst wild summer grass" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+              <span class="absolute top-3 left-3 bg-parchmentBg/90 backdrop-blur-xs text-[9px] font-sans uppercase tracking-[0.2em] px-2 py-0.5 text-deepOlive font-medium rounded-xs">
+                Vignette VIII
+              </span>
+            </div>
+            <div class="flex flex-col flex-grow justify-between">
+              <div>
+                <span class="editorial-label text-[10px] text-terracotta">Wayfinding &bull; Path</span>
+                <h3 class="font-serif text-lg text-darkCharcoal group-hover:text-deepOlive transition mb-1 leading-snug">
+                  Coast Path & Signpost
+                </h3>
+                <p class="font-sans text-xs text-darkCharcoal/70 line-clamp-2 leading-relaxed">
+                  Timber arrows pointing toward coastal trails, scenic lookouts, and village tea houses.
+                </p>
+              </div>
+              <div class="pt-3 mt-3 border-t border-warmLinen/60 flex items-center justify-between">
+                <span class="font-script text-base text-deepOlive">unhurried steps</span>
+                <span class="text-terracotta text-xs font-sans">&rarr;</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Latest Stories Section (3 Columns as in original mock) -->
+      <section id="stories" class="py-20 sm:py-24 max-w-7xl mx-auto px-6 sm:px-10 border-b border-warmLinen/60">
+        <div class="flex items-baseline justify-between mb-12">
+          <div>
+            <span class="editorial-label text-softSage block mb-1">Recent Dispatches</span>
+            <h2 class="font-serif text-3xl sm:text-4xl text-darkCharcoal font-normal">Latest Stories</h2>
+          </div>
+          <a href="javascript:void(0)" onclick="switchView('guides')" class="editorial-label text-xs text-deepOlive hover:text-terracotta flex items-center gap-1.5 transition">
+            <span>View All Stories</span>
+            <span>&rarr;</span>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+
+          <!-- Story 1: Lake Como -->
+          <article class="group cursor-pointer flex flex-col bg-lightLinen/40 p-4 rounded-sm border border-warmLinen hover:shadow-editorial transition duration-300" onclick="switchView('article')">
+            <div class="relative overflow-hidden aspect-[4/5] bg-warmLinen rounded-sm mb-5">
+              <img 
+                src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=85&w=800&auto=format&fit=crop" 
+                alt="Lake Como shore with pastel villas and tranquil water"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+              <span class="absolute top-4 left-4 bg-parchmentBg/95 backdrop-blur-xs text-[9px] font-sans uppercase tracking-[0.2em] px-2.5 py-1 text-deepOlive font-medium rounded-xs">
+                Travel
+              </span>
+            </div>
+            <div class="flex flex-col flex-1">
+              <h3 class="font-serif text-2xl text-darkCharcoal group-hover:text-deepOlive transition duration-200 mb-2 leading-snug">
+                A Weekend in Lake Como
+              </h3>
+              <p class="font-sans text-xs text-darkCharcoal/75 leading-relaxed mb-4 flex-1">
+                Lakeside hours, slow mornings, and the beauty of lingering. Watching wooden ferries drift across the calm waters of Varenna.
+              </p>
+              <div class="pt-3 border-t border-warmLinen flex items-center justify-between">
+                <span class="editorial-label text-[11px] text-terracotta group-hover:underline flex items-center gap-1">
+                  Read More &rarr;
+                </span>
+                <span class="font-sans text-[10px] text-darkCharcoal/60">6 min read</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Story 2: Florence Pasta -->
+          <article class="group cursor-pointer flex flex-col bg-lightLinen/40 p-4 rounded-sm border border-warmLinen hover:shadow-editorial transition duration-300" onclick="switchView('article')">
+            <div class="relative overflow-hidden aspect-[4/5] bg-warmLinen rounded-sm mb-5">
+              <img 
+                src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=85&w=800&auto=format&fit=crop" 
+                alt="Artisanal pasta bowl with olive oil and wine in Florence"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+              <span class="absolute top-4 left-4 bg-parchmentBg/95 backdrop-blur-xs text-[9px] font-sans uppercase tracking-[0.2em] px-2.5 py-1 text-deepOlive font-medium rounded-xs">
+                Food
+              </span>
+            </div>
+            <div class="flex flex-col flex-1">
+              <h3 class="font-serif text-2xl text-darkCharcoal group-hover:text-deepOlive transition duration-200 mb-2 leading-snug">
+                The Best Pasta I Ate in Florence
+              </h3>
+              <p class="font-sans text-xs text-darkCharcoal/75 leading-relaxed mb-4 flex-1">
+                A small osteria down an Oltrarno alley, a warm plate of tagliatelle al ragù, a ceramic carafe of house wine, and a memory that stayed.
+              </p>
+              <div class="pt-3 border-t border-warmLinen flex items-center justify-between">
+                <span class="editorial-label text-[11px] text-terracotta group-hover:underline flex items-center gap-1">
+                  Read More &rarr;
+                </span>
+                <span class="font-sans text-[10px] text-darkCharcoal/60">4 min read</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Story 3: Kew Gardens & Botanical Sanctuaries -->
+          <article class="group cursor-pointer flex flex-col bg-lightLinen/40 p-4 rounded-sm border border-warmLinen hover:shadow-editorial transition duration-300" onclick="switchView('article')">
+            <div class="relative overflow-hidden aspect-[4/5] bg-warmLinen rounded-sm mb-5">
+              <img 
+                src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=85&w=800&auto=format&fit=crop" 
+                alt="Victorian greenhouse glasshouse with exotic palms"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+              <span class="absolute top-4 left-4 bg-parchmentBg/95 backdrop-blur-xs text-[9px] font-sans uppercase tracking-[0.2em] px-2.5 py-1 text-deepOlive font-medium rounded-xs">
+                Landscape
+              </span>
+            </div>
+            <div class="flex flex-col flex-1">
+              <h3 class="font-serif text-2xl text-darkCharcoal group-hover:text-deepOlive transition duration-200 mb-2 leading-snug">
+                The Quiet Beauty of Kew Gardens
+              </h3>
+              <p class="font-sans text-xs text-darkCharcoal/75 leading-relaxed mb-4 flex-1">
+                Design, history, and ancient flora in perfect harmony beneath the intricate Victorian ironwork of the Temperate House.
+              </p>
+              <div class="pt-3 border-t border-warmLinen flex items-center justify-between">
+                <span class="editorial-label text-[11px] text-terracotta group-hover:underline flex items-center gap-1">
+                  Read More &rarr;
+                </span>
+                <span class="font-sans text-[10px] text-darkCharcoal/60">7 min read</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Browse By Theme Section (Food, Travel, Landscape, Journal) -->
+      <section id="themes" class="py-20 bg-lightLinen/70 border-b border-warmLinen/60">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10">
+          
+          <div class="text-center max-w-xl mx-auto mb-14">
+            <span class="editorial-label text-softSage block mb-1">Curated Topics</span>
+            <h2 class="font-serif text-3xl sm:text-4xl text-darkCharcoal font-normal">Browse By Theme</h2>
+            <div class="w-12 h-0.5 bg-warmLinen mx-auto mt-3"></div>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
+
+            <!-- Theme: FOOD -->
+            <div class="bg-parchmentBg p-7 rounded-sm border border-warmLinen text-center hover:border-terracotta transition shadow-subtle flex flex-col items-center">
+              <div class="w-12 h-12 rounded-full bg-softEcru flex items-center justify-center text-deepOlive mb-4 border border-warmLinen">
+                <!-- Fork & Spoon outline -->
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" d="M12 4v16m-4-16v6a2 2 0 002 2h0a2 2 0 002-2V4m6 0v7a2 2 0 01-2 2h0a2 2 0 01-2-2V4m2 16v-7"/>
+                </svg>
+              </div>
+              <h3 class="font-serif text-xl text-darkCharcoal mb-3">Food</h3>
+              <ul class="space-y-1.5 font-sans text-xs text-darkCharcoal/70">
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Restaurants')" class="hover:text-terracotta transition">Osterias & Bistros</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Coffee')" class="hover:text-terracotta transition">Slow Coffee</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Markets')" class="hover:text-terracotta transition">Village Markets</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Recipes')" class="hover:text-terracotta transition">Campania Recipes</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Olive Oil')" class="hover:text-terracotta transition">Olive Groves</a></li>
+              </ul>
+            </div>
+
+            <!-- Theme: TRAVEL -->
+            <div class="bg-parchmentBg p-7 rounded-sm border border-warmLinen text-center hover:border-terracotta transition shadow-subtle flex flex-col items-center">
+              <div class="w-12 h-12 rounded-full bg-softEcru flex items-center justify-center text-deepOlive mb-4 border border-warmLinen">
+                <!-- Globe outline -->
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9" stroke-width="1.4"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" d="M3.6 9h16.8M3.6 15h16.8M12 3a14.5 14.5 0 000 18 14.5 14.5 0 000-18z"/>
+                </svg>
+              </div>
+              <h3 class="font-serif text-xl text-darkCharcoal mb-3">Travel</h3>
+              <ul class="space-y-1.5 font-sans text-xs text-darkCharcoal/70">
+                <li><a href="javascript:void(0)" onclick="filterByTopic('City Guides')" class="hover:text-terracotta transition">City Guides</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Weekend Trips')" class="hover:text-terracotta transition">Weekend Trips</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Coast Walks')" class="hover:text-terracotta transition">Coastal Paths</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Hidden Gems')" class="hover:text-terracotta transition">Quiet Villages</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Design Stays')" class="hover:text-terracotta transition">Design Stays</a></li>
+              </ul>
+            </div>
+
+            <!-- Theme: LANDSCAPE -->
+            <div class="bg-parchmentBg p-7 rounded-sm border border-warmLinen text-center hover:border-terracotta transition shadow-subtle flex flex-col items-center">
+              <div class="w-12 h-12 rounded-full bg-softEcru flex items-center justify-center text-deepOlive mb-4 border border-warmLinen">
+                <!-- Botanical Leaf outline -->
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" d="M12 21a9 9 0 009-9c0-6-9-9-9-9s-9 3-9 9a9 9 0 009 9z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" d="M12 3v18"/>
+                </svg>
+              </div>
+              <h3 class="font-serif text-xl text-darkCharcoal mb-3">Landscape</h3>
+              <ul class="space-y-1.5 font-sans text-xs text-darkCharcoal/70">
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Gardens')" class="hover:text-terracotta transition">Historic Gardens</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Parks')" class="hover:text-terracotta transition">Botanical Parks</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Architecture')" class="hover:text-terracotta transition">Vernacular Homes</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Piazzas')" class="hover:text-terracotta transition">Stone Piazzas</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Trails')" class="hover:text-terracotta transition">Walking Itineraries</a></li>
+              </ul>
+            </div>
+
+            <!-- Theme: JOURNAL -->
+            <div class="bg-parchmentBg p-7 rounded-sm border border-warmLinen text-center hover:border-terracotta transition shadow-subtle flex flex-col items-center">
+              <div class="w-12 h-12 rounded-full bg-softEcru flex items-center justify-center text-deepOlive mb-4 border border-warmLinen">
+                <!-- Book/Journal outline -->
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                </svg>
+              </div>
+              <h3 class="font-serif text-xl text-darkCharcoal mb-3">Journal</h3>
+              <ul class="space-y-1.5 font-sans text-xs text-darkCharcoal/70">
+                <li><a href="javascript:void(0)" onclick="switchView('fieldnotes')" class="hover:text-terracotta transition">Field Notes</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Essays')" class="hover:text-terracotta transition">Slow Living Essays</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Inspiration')" class="hover:text-terracotta transition">Visual Diary</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Memories')" class="hover:text-terracotta transition">Sensory Travel</a></li>
+                <li><a href="javascript:void(0)" onclick="filterByTopic('Behind')" class="hover:text-terracotta transition">Behind The Stories</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Illustrated Map: Favourite Places -->
+      <section id="places" class="py-20 sm:py-28 max-w-7xl mx-auto px-6 sm:px-10 border-b border-warmLinen/60">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          
+          <!-- Map Info Column -->
+          <div class="lg:col-span-5 pr-0 lg:pr-6">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-softSage"></span>
+              <span class="editorial-label text-deepOlive">Field Cartography</span>
+            </div>
+            <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-darkCharcoal font-normal mb-4">
+              Favourite Places
+            </h2>
+            <p class="font-sans text-xs sm:text-sm text-darkCharcoal/75 leading-relaxed mb-6">
+              Explore stories from around the world. We mark only places where we have stayed unhurried &mdash; from quiet trattorias along the Tyrrhenian coast to ancient moss temples in Kyoto.
+            </p>
+
+            <!-- Dynamic Pin Information Card -->
+            <div id="map-pin-card" class="bg-lightLinen/70 p-6 rounded-sm border border-warmLinen shadow-subtle mb-6 transition-all duration-300">
+              <div class="flex items-center justify-between mb-2">
+                <span id="pin-card-region" class="editorial-label text-[10px] text-terracotta">Campania &bull; Italy</span>
+                <span id="pin-card-season" class="font-sans text-[10px] text-darkCharcoal/60">May &ndash; October</span>
+              </div>
+              <h4 id="pin-card-title" class="font-serif text-2xl text-darkCharcoal mb-2">Afternoon Light in Positano</h4>
+              <p id="pin-card-desc" class="font-sans text-xs text-darkCharcoal/75 leading-relaxed mb-4">
+                Steep cliffside stairs, fragrant lemon groves, and the luminous pink and amber glow falling across the Tyrrhenian sea.
+              </p>
+              <div class="flex items-center justify-between pt-3 border-t border-warmLinen/60">
+                <button onclick="switchView('article')" class="editorial-label text-xs text-deepOlive hover:text-terracotta transition flex items-center gap-1 font-semibold">
+                  Read Dispatch &rarr;
+                </button>
+                <span class="font-script text-base text-terracotta">place worth lingering</span>
+              </div>
+            </div>
+
+            <button onclick="switchView('guides')" class="px-5 py-2.5 border border-deepOlive text-deepOlive hover:bg-deepOlive hover:text-softEcru editorial-label text-[11px] rounded-sm transition">
+              Explore All 24 Saved Places
+            </button>
+          </div>
+
+          <!-- Stylized Parchment Map Canvas -->
+          <div class="lg:col-span-7 relative bg-[#EDE8E0] rounded-sm p-4 border border-warmLinen shadow-inner overflow-hidden min-h-[420px] sm:min-h-[480px]">
+            
+            <!-- SVG Map Illustration Background with European Coastlines & Graticules -->
+            <div class="absolute inset-0 opacity-80 pointer-events-none">
+              <svg class="w-full h-full text-warmLinen" viewBox="0 0 800 500" fill="none" stroke="currentColor">
+                <!-- Grid Lines -->
+                <path d="M0 100 H800 M0 200 H800 M0 300 H800 M0 400 H800" stroke-width="0.7" stroke-dasharray="3 6"/>
+                <path d="M150 0 V500 M300 0 V500 M450 0 V500 M600 0 V500" stroke-width="0.7" stroke-dasharray="3 6"/>
+                
+                <!-- Stylized Landmasses (Europe & Med) -->
+                <path d="M170 90 Q 230 70, 270 120 T 320 180 T 420 190 T 520 160 T 630 220 T 650 310 T 520 380 T 380 340 T 260 380 T 170 320 T 150 220 Z" fill="#E2DBD0" stroke="#CFC5B4" stroke-width="1.2"/>
+                <path d="M210 130 Q 230 110, 240 140 T 230 190 T 195 180 Z" fill="#D6CDC0" stroke="#CFC5B4" stroke-width="1"/>
+                <!-- Italy Boot -->
+                <path d="M370 260 L 410 320 L 430 360 L 460 380 L 435 390 L 400 350 L 375 290 Z" fill="#D6CDC0" stroke="#CFC5B4" stroke-width="1.2"/>
+
+                <!-- Delicate Compass Rose -->
+                <g transform="translate(710, 75)" stroke="#B3A895" stroke-width="1">
+                  <circle cx="0" cy="0" r="30" fill="none"/>
+                  <circle cx="0" cy="0" r="24" stroke-dasharray="1 3"/>
+                  <path d="M0 -28 L 5 -5 L 28 0 L 5 5 L 0 28 L -5 5 L -28 0 L -5 -5 Z" fill="#DCCDBA" fill-opacity="0.4"/>
+                  <text x="-4" y="-32" font-family="'Montserrat', sans-serif" font-size="9" fill="#3F4A3A" font-weight="600">N</text>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Clickable Interactive Pins -->
+            <div class="relative z-10 w-full h-[430px]">
+
+              <!-- Pin 1: Positano -->
+              <button onclick="setMapPin('positano')" class="absolute top-[68%] left-[53%] -translate-x-1/2 -translate-y-1/2 group focus:outline-none" aria-label="Positano Pin">
+                <span class="flex flex-col items-center">
+                  <span id="pin-dot-positano" class="w-6 h-6 rounded-full bg-terracotta text-white flex items-center justify-center text-xs shadow-md pin-active-glow border-2 border-parchmentBg">
+                    <span class="w-1.5 h-1.5 rounded-full bg-parchmentBg"></span>
+                  </span>
+                  <span class="editorial-label text-[9px] text-darkCharcoal bg-parchmentBg/90 px-1.5 py-0.5 rounded shadow-xs mt-1 border border-warmLinen">Positano</span>
+                </span>
+              </button>
+
+              <!-- Pin 2: Lake Como -->
+              <button onclick="setMapPin('como')" class="absolute top-[50%] left-[46%] -translate-x-1/2 -translate-y-1/2 group focus:outline-none" aria-label="Lake Como Pin">
+                <span class="flex flex-col items-center">
+                  <span id="pin-dot-como" class="w-5 h-5 rounded-full bg-deepOlive text-white flex items-center justify-center text-xs shadow hover:scale-110 border-2 border-parchmentBg transition">
+                    <span class="w-1.5 h-1.5 rounded-full bg-warmLinen"></span>
+                  </span>
+                  <span class="font-sans text-[10px] text-darkCharcoal bg-parchmentBg/85 px-1 py-0.2 rounded mt-0.5">Lake Como</span>
+                </span>
+              </button>
+
+              <!-- Pin 3: Florence & Tuscany -->
+              <button onclick="setMapPin('florence')" class="absolute top-[58%] left-[49%] -translate-x-1/2 -translate-y-1/2 group focus:outline-none" aria-label="Florence Pin">
+                <span class="flex flex-col items-center">
+                  <span id="pin-dot-florence" class="w-5 h-5 rounded-full bg-deepOlive text-white flex items-center justify-center text-xs shadow hover:scale-110 border-2 border-parchmentBg transition">
+                    <span class="w-1.5 h-1.5 rounded-full bg-warmLinen"></span>
+                  </span>
+                  <span class="font-sans text-[10px] text-darkCharcoal bg-parchmentBg/85 px-1 py-0.2 rounded mt-0.5">Florence & Val d’Orcia</span>
+                </span>
+              </button>
+
+              <!-- Pin 4: Paris -->
+              <button onclick="setMapPin('paris')" class="absolute top-[42%] left-[37%] -translate-x-1/2 -translate-y-1/2 group focus:outline-none" aria-label="Paris Pin">
+                <span class="flex flex-col items-center">
+                  <span id="pin-dot-paris" class="w-5 h-5 rounded-full bg-deepOlive text-white flex items-center justify-center text-xs shadow hover:scale-110 border-2 border-parchmentBg transition">
+                    <span class="w-1.5 h-1.5 rounded-full bg-warmLinen"></span>
+                  </span>
+                  <span class="font-sans text-[10px] text-darkCharcoal bg-parchmentBg/85 px-1 py-0.2 rounded mt-0.5">Paris</span>
+                </span>
+              </button>
+
+              <!-- Pin 5: Kew & Cornwall -->
+              <button onclick="setMapPin('kew')" class="absolute top-[34%] left-[31%] -translate-x-1/2 -translate-y-1/2 group focus:outline-none" aria-label="Kew Pin">
+                <span class="flex flex-col items-center">
+                  <span id="pin-dot-kew" class="w-5 h-5 rounded-full bg-deepOlive text-white flex items-center justify-center text-xs shadow hover:scale-110 border-2 border-parchmentBg transition">
+                    <span class="w-1.5 h-1.5 rounded-full bg-warmLinen"></span>
+                  </span>
+                  <span class="font-sans text-[10px] text-darkCharcoal bg-parchmentBg/85 px-1 py-0.2 rounded mt-0.5">Kew & Cornwall</span>
+                </span>
+              </button>
+
+              <!-- Pin 6: Kyoto (Global Callout) -->
+              <button onclick="setMapPin('kyoto')" class="absolute top-[28%] right-[8%] -translate-x-1/2 -translate-y-1/2 group focus:outline-none" aria-label="Kyoto Pin">
+                <span class="flex flex-col items-center">
+                  <span id="pin-dot-kyoto" class="w-5 h-5 rounded-full bg-deepOlive text-white flex items-center justify-center text-xs shadow hover:scale-110 border-2 border-parchmentBg transition">
+                    <span class="w-1.5 h-1.5 rounded-full bg-warmLinen"></span>
+                  </span>
+                  <span class="font-sans text-[10px] text-darkCharcoal bg-parchmentBg/85 px-1 py-0.2 rounded mt-0.5">Kyoto</span>
+                </span>
+              </button>
+
+            </div>
+
+            <div class="absolute bottom-3 left-4 text-darkCharcoal/60 text-[10px] font-sans">
+              &copy; Where We Linger &bull; Hand-curated field plots
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Collections (By Feeling) 6 Mood Filmstrips -->
+      <section class="py-20 border-b border-warmLinen/60">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10">
+          
+          <div class="flex items-baseline justify-between mb-10">
+            <div>
+              <span class="editorial-label text-softSage block mb-1">Atmospheric Moods</span>
+              <h2 class="font-serif text-2xl sm:text-3xl text-darkCharcoal font-normal">Collections (By Feeling)</h2>
+            </div>
+            <span class="font-script text-xl text-terracotta hidden sm:inline-block">gather by sensation</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+
+            <!-- 1. Rainy Days -->
+            <div onclick="showNotification('Browsing collection: Rainy Days')" class="group cursor-pointer text-center">
+              <div class="relative aspect-square overflow-hidden rounded-sm bg-warmLinen mb-2 shadow-subtle">
+                <img src="https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?q=80&w=400&auto=format&fit=crop" alt="Rain drops on café window" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute inset-0 bg-deepOlive/20 group-hover:bg-deepOlive/40 transition"></div>
+              </div>
+              <h3 class="font-serif text-sm text-darkCharcoal group-hover:text-deepOlive font-medium transition">Rainy Days</h3>
+            </div>
+
+            <!-- 2. Seaside Escapes -->
+            <div onclick="showNotification('Browsing collection: Seaside Escapes')" class="group cursor-pointer text-center">
+              <div class="relative aspect-square overflow-hidden rounded-sm bg-warmLinen mb-2 shadow-subtle">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=400&auto=format&fit=crop" alt="Gentle sea waves" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute inset-0 bg-deepOlive/20 group-hover:bg-deepOlive/40 transition"></div>
+              </div>
+              <h3 class="font-serif text-sm text-darkCharcoal group-hover:text-deepOlive font-medium transition">Seaside Escapes</h3>
+            </div>
+
+            <!-- 3. Autumn Colours -->
+            <div onclick="showNotification('Browsing collection: Autumn Colours')" class="group cursor-pointer text-center">
+              <div class="relative aspect-square overflow-hidden rounded-sm bg-warmLinen mb-2 shadow-subtle">
+                <img src="https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=400&auto=format&fit=crop" alt="Golden leaves and amber light" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute inset-0 bg-deepOlive/20 group-hover:bg-deepOlive/40 transition"></div>
+              </div>
+              <h3 class="font-serif text-sm text-darkCharcoal group-hover:text-deepOlive font-medium transition">Autumn Colours</h3>
+            </div>
+
+            <!-- 4. Long Lunches -->
+            <div onclick="showNotification('Browsing collection: Long Lunches')" class="group cursor-pointer text-center">
+              <div class="relative aspect-square overflow-hidden rounded-sm bg-warmLinen mb-2 shadow-subtle">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop" alt="Table set under shade" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute inset-0 bg-deepOlive/20 group-hover:bg-deepOlive/40 transition"></div>
+              </div>
+              <h3 class="font-serif text-sm text-darkCharcoal group-hover:text-deepOlive font-medium transition">Long Lunches</h3>
+            </div>
+
+            <!-- 5. Hidden Villages -->
+            <div onclick="showNotification('Browsing collection: Hidden Villages')" class="group cursor-pointer text-center">
+              <div class="relative aspect-square overflow-hidden rounded-sm bg-warmLinen mb-2 shadow-subtle">
+                <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=400&auto=format&fit=crop" alt="Ancient hillside stone village" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute inset-0 bg-deepOlive/20 group-hover:bg-deepOlive/40 transition"></div>
+              </div>
+              <h3 class="font-serif text-sm text-darkCharcoal group-hover:text-deepOlive font-medium transition">Hidden Villages</h3>
+            </div>
+
+            <!-- 6. Places Worth Returning To -->
+            <div onclick="showNotification('Browsing collection: Places Worth Returning To')" class="group cursor-pointer text-center">
+              <div class="relative aspect-square overflow-hidden rounded-sm bg-warmLinen mb-2 shadow-subtle">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=400&auto=format&fit=crop" alt="Misty Tuscan cypress view" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute inset-0 bg-deepOlive/20 group-hover:bg-deepOlive/40 transition"></div>
+              </div>
+              <h3 class="font-serif text-sm text-darkCharcoal group-hover:text-deepOlive font-medium transition">Places Worth Returning</h3>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Visual Diary / From Instagram Section -->
+      <section class="py-20 border-b border-warmLinen/60 bg-parchmentBg">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+            <div>
+              <span class="editorial-label text-softSage block mb-1">From Instagram</span>
+              <h2 class="font-serif text-2xl uppercase tracking-[0.16em] text-darkCharcoal font-light">Visual Diary & Dispatches</h2>
+            </div>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="font-sans text-xs tracking-wider text-deepOlive hover:text-terracotta flex items-center gap-1.5 transition">
+              <span>Follow Along &bull; @wherewelinger</span>
+              <span>&nearr;</span>
+            </a>
+          </div>
+
+          <!-- 5 Photography Tiles from Moodboard -->
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3">
+            <div class="aspect-square bg-warmLinen rounded-sm overflow-hidden group relative">
+              <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=400&auto=format&fit=crop" alt="Como shore" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <div class="absolute inset-0 bg-deepOlive/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-softEcru text-[10px] font-sans p-2 text-center">Como morning light</div>
+            </div>
+            <div class="aspect-square bg-warmLinen rounded-sm overflow-hidden group relative">
+              <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=400&auto=format&fit=crop" alt="Handmade pasta" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <div class="absolute inset-0 bg-deepOlive/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-softEcru text-[10px] font-sans p-2 text-center">Trattoria lunch in Oltrarno</div>
+            </div>
+            <div class="aspect-square bg-warmLinen rounded-sm overflow-hidden group relative">
+              <img src="https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=400&auto=format&fit=crop" alt="Positano cliffside" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <div class="absolute inset-0 bg-deepOlive/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-softEcru text-[10px] font-sans p-2 text-center">Positano golden light</div>
+            </div>
+            <div class="aspect-square bg-warmLinen rounded-sm overflow-hidden group relative">
+              <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=400&auto=format&fit=crop" alt="Kew botanical arches" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <div class="absolute inset-0 bg-deepOlive/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-softEcru text-[10px] font-sans p-2 text-center">Victorian glasshouse flora</div>
+            </div>
+            <div class="aspect-square bg-warmLinen rounded-sm overflow-hidden group relative col-span-2 sm:col-span-1">
+              <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=400&auto=format&fit=crop" alt="Wildflower meadow and coast path sign" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+              <div class="absolute inset-0 bg-deepOlive/60 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-softEcru text-[10px] font-sans p-2 text-center">Coast path meadow sign</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- End #view-home -->
+
+    <!-- ============================================================= -->
+    <!-- VIEW 2: ARTICLE READER ("Afternoon Light in Positano")        -->
+    <!-- ============================================================= -->
+    <div id="view-article" class="view-pane hidden bg-parchmentBg pb-24">
+      <article>
+        
+        <!-- Hero Masthead for Positano -->
+        <header class="relative w-full h-[58vh] min-h-[440px] max-h-[660px] bg-warmLinen">
+          <img 
+            src="https://images.unsplash.com/photo-1533105079780-92b9be482077?q=85&w=1900&auto=format&fit=crop" 
+            alt="Golden afternoon light sweeping across the cliffside village of Positano"
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-parchmentBg via-deepOlive/30 to-black/20"></div>
+
+          <!-- Back button -->
+          <div class="absolute top-6 left-6 z-20">
+            <button onclick="switchView('home')" class="bg-parchmentBg/90 hover:bg-white text-darkCharcoal px-4 py-2 rounded-sm shadow-sm editorial-label text-[10px] flex items-center gap-2 transition">
+              &larr; Back to Stories
+            </button>
+          </div>
+        </header>
+
+        <!-- Article Core Container -->
+        <div class="max-w-3xl mx-auto px-6 -mt-20 relative z-10">
+          
+          <!-- Article Title & Meta Box -->
+          <div class="bg-parchmentBg p-8 sm:p-12 rounded-sm border border-warmLinen shadow-editorial text-center mb-12">
+            <span class="editorial-label text-terracotta block mb-2">Travel &bull; Campania Coast</span>
+            <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-darkCharcoal leading-tight font-normal mb-5">
+              Afternoon Light<br>in Positano
+            </h1>
+
+            <div class="flex items-center justify-center gap-3 text-darkCharcoal/60 font-sans text-xs uppercase tracking-widest border-t border-b border-warmLinen/60 py-3 max-w-md mx-auto">
+              <span>May 18, 2026</span>
+              <span>&bull;</span>
+              <span>Italy</span>
+              <span>&bull;</span>
+              <span>6 Min Read</span>
+            </div>
+          </div>
+
+          <!-- Editorial Article Body -->
+          <div class="space-y-7 text-darkCharcoal text-base sm:text-lg leading-relaxed font-sans font-light">
+
+            <p class="story-dropcap">
+              Positano doesn’t reveal itself immediately. It asks you to climb, to wander, and to stop for coffee far more often than you had planned. Arriving by sea in the mid-morning, the cliffside village appears as if carved from rose sandstone, climbing impossibly from the turquoise edge of the Tyrrhenian directly into the blue sky.
+            </p>
+
+            <p>
+              The scent of sea salt and crushed Meyer lemon leaves clings to every shadowed archway. While crowds gravitate toward the main beach by midday, the real magic of this place belongs to the quiet hours between three and six in the afternoon, when the sun dips behind the western ridge of Monte Faito and a softened, luminous veil of amber settles over the pastel façades.
+            </p>
+
+            <!-- Atmospheric Mid-Article Photo Box matching Moodboard Vignette III & V -->
+            <figure class="my-10">
+              <div class="overflow-hidden rounded-sm bg-warmLinen shadow-editorial aspect-[16/10]">
+                <img 
+                  src="https://images.unsplash.com/photo-1544025162-d76694265947?q=85&w=1200&auto=format&fit=crop" 
+                  alt="Outdoor Mediterranean terrace table with pottery, pasta, wine overlooking the Tyrrhenian sea"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <figcaption class="mt-3 text-center font-sans text-xs text-darkCharcoal/60 italic">
+                Lunch at an old wisteria-shaded terrace: chilled Falanghina, spaghetti al limone, and sea views.
+              </figcaption>
+            </figure>
+
+            <p>
+              The streets are steep and winding, the houses stacked like waves. Sit in the afternoon light; everything slows down. Linen dries on narrow wrought-iron balconies, the sea sparkles like polished glass, and life feels beautifully, effortlessly simple.
+            </p>
+
+            <!-- Pull Quote Section -->
+            <blockquote class="my-10 py-6 px-8 border-l-3 border-terracotta bg-lightLinen/60 rounded-r-sm font-serif italic text-2xl text-deepOlive leading-snug">
+              &ldquo;To linger in Positano is to understand that beauty does not rush. It asks only for your full, unhurried attention.&rdquo;
+            </blockquote>
+
+            <!-- Three-column gallery matching Moodboard -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-10">
+              <div class="aspect-[4/5] bg-warmLinen rounded-sm overflow-hidden shadow-subtle">
+                <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=500&auto=format&fit=crop" alt="Positano coastal view" class="w-full h-full object-cover" loading="lazy">
+              </div>
+              <div class="aspect-[4/5] bg-warmLinen rounded-sm overflow-hidden shadow-subtle">
+                <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=500&auto=format&fit=crop" alt="Fresh pasta dish" class="w-full h-full object-cover" loading="lazy">
+              </div>
+              <div class="aspect-[4/5] bg-warmLinen rounded-sm overflow-hidden shadow-subtle">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=500&auto=format&fit=crop" alt="Mediterranean rocks" class="w-full h-full object-cover" loading="lazy">
+              </div>
+            </div>
+
+            <!-- Places Mentioned Box (from Mockup) -->
+            <div class="my-12 p-8 bg-lightLinen/80 border border-warmLinen rounded-sm">
+              <h4 class="font-serif text-xl text-darkCharcoal font-semibold mb-4 border-b border-warmLinen pb-2">
+                Places Mentioned in this Story
+              </h4>
+              <dl class="space-y-4 text-xs font-sans">
+                <div>
+                  <dt class="font-semibold text-deepOlive flex items-center gap-2 text-sm">
+                    <span>Chez Black</span>
+                    <span class="text-darkCharcoal/60 font-normal font-sans tracking-wide text-xs">&bull; Café & Seafood</span>
+                  </dt>
+                  <dd class="text-darkCharcoal/75 mt-0.5">A classic seaside establishment with legendary pasta with sea urchin and unobstructed harbor views.</dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-deepOlive flex items-center gap-2 text-sm">
+                    <span>Da Vincenzo</span>
+                    <span class="text-darkCharcoal/60 font-normal font-sans tracking-wide text-xs">&bull; Trattoria</span>
+                  </dt>
+                  <dd class="text-darkCharcoal/75 mt-0.5">Family-run since 1958, perched high on the hill. Simple, honest, and unforgettable ricotta gnocchi.</dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-deepOlive flex items-center gap-2 text-sm">
+                    <span>Sentiero degli Dei</span>
+                    <span class="text-darkCharcoal/60 font-normal font-sans tracking-wide text-xs">&bull; Coastal Path</span>
+                  </dt>
+                  <dd class="text-darkCharcoal/75 mt-0.5">The Path of the Gods: a breathtaking walking path along the cliffs 500 meters above the glittering sea.</dd>
+                </div>
+              </dl>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="pt-8 border-t border-warmLinen flex flex-col sm:flex-row items-center justify-between gap-4">
+              <button onclick="showNotification('Link copied to clipboard')" class="editorial-label text-xs text-deepOlive hover:text-terracotta flex items-center gap-1.5">
+                <span>&larr; Previous Story: Lake Como</span>
+              </button>
+              <button onclick="showNotification('Next Story: Florence')" class="editorial-label text-xs text-deepOlive hover:text-terracotta flex items-center gap-1.5">
+                <span>Next Story: Florence &rarr;</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </article>
+    </div><!-- End #view-article -->
+
+    <!-- ============================================================= -->
+    <!-- VIEW 3: FIELD NOTES & JOURNAL (Replicating Linen Notebook)     -->
+    <!-- ============================================================= -->
+    <div id="view-fieldnotes" class="view-pane hidden py-16 sm:py-24 max-w-5xl mx-auto px-6 sm:px-10">
+      
+      <!-- Tactile Notebook Header -->
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="editorial-label text-terracotta block mb-2">Tactile Journaling</span>
+        <h1 class="font-serif text-4xl sm:text-5xl text-darkCharcoal font-normal mb-3">Field Notes & Memories</h1>
+        <p class="font-script text-2xl text-deepOlive">observations inscribed in quiet hours</p>
+        <div class="w-12 h-0.5 bg-warmLinen mx-auto mt-4"></div>
+      </div>
+
+      <!-- Notebook Spread Container -->
+      <div class="bg-lightLinen border-2 border-warmLinen p-8 sm:p-14 rounded-sm shadow-editorial relative">
+        <!-- Linen stitch line detail -->
+        <div class="absolute inset-y-0 left-1/2 -translate-x-1/2 w-[1px] bg-warmLinen hidden md:block"></div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+          
+          <!-- Left Page: Cover & Tree Illustration matching Moodboard Tile 6 -->
+          <div class="flex flex-col items-center justify-center p-6 border border-warmLinen/60 rounded bg-parchmentBg text-center">
+            <!-- Hand-drawn tree emblem -->
+            <svg class="w-16 h-16 text-deepOlive mb-4" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+              <path d="M50 85 V 50 M45 60 L 50 50 L 55 60" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- Tree canopy curves -->
+              <circle cx="50" cy="40" r="22" stroke-width="1.5" stroke-dasharray="2 3"/>
+              <path d="M40 35 Q 50 20, 60 35 Q 70 45, 55 52 Q 45 52, 35 45 Z" fill="#A2AE97" fill-opacity="0.3"/>
+            </svg>
+            <h2 class="editorial-label tracking-[0.3em] text-lg text-darkCharcoal mb-2 font-bold">FIELD NOTES</h2>
+            <p class="font-script text-xl text-terracotta mb-4">memories</p>
+            <span class="font-sans text-[10px] uppercase tracking-widest text-darkCharcoal/60">Volume IV &bull; Mediterranean Notes</span>
+          </div>
+
+          <!-- Right Page: Hand-inscribed reflections -->
+          <div class="flex flex-col justify-center space-y-4">
+            <div class="border-b border-warmLinen pb-3">
+              <span class="editorial-label text-[10px] text-softSage">Entry 42 &bull; Bellagio</span>
+              <p class="font-sans text-xs text-darkCharcoal/80 leading-relaxed mt-1">
+                "The morning bells began across the water at 7:15. Wisteria petals floated onto the stone balustrade. Coffee cools quickly in the lake breeze, but nobody hurries to finish."
+              </p>
+            </div>
+
+            <div class="border-b border-warmLinen pb-3">
+              <span class="editorial-label text-[10px] text-terracotta">Entry 43 &bull; Pienza</span>
+              <p class="font-sans text-xs text-darkCharcoal/80 leading-relaxed mt-1">
+                "The smell of sheep pecorino and wood smoke. In Tuscany, distance is measured not in kilometers, but in the slow changing shade of the cypress trees."
+              </p>
+            </div>
+
+            <div>
+              <span class="editorial-label text-[10px] text-deepOlive">Entry 44 &bull; Cornwall Coast Path</span>
+              <p class="font-sans text-xs text-darkCharcoal/80 leading-relaxed mt-1">
+                "Followed the weathered wooden sign toward the cliffs. Wild gorse and yellow clover growing against the granite stones. Tea served in heavy earthenware cups."
+              </p>
+            </div>
+
+            <div class="pt-3">
+              <button onclick="showNotification('Interactive journal reader open')" class="editorial-label text-[11px] text-deepOlive hover:text-terracotta transition">
+                Read All 44 Field Inscriptions &rarr;
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- End #view-fieldnotes -->
+
+    <!-- ============================================================= -->
+    <!-- VIEW 4: GUIDES DIRECTORY                                      -->
+    <!-- ============================================================= -->
+    <div id="view-guides" class="view-pane hidden py-16 sm:py-24 max-w-7xl mx-auto px-6 sm:px-10">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="editorial-label text-softSage block mb-2">Curated Itineraries</span>
+        <h1 class="font-serif text-4xl sm:text-5xl text-darkCharcoal font-normal mb-3">Field Guides</h1>
+        <p class="font-sans text-xs sm:text-sm text-darkCharcoal/70 leading-relaxed italic">
+          Thoughtful travel guides to help you plan slow, meaningful journeys across Europe, Asia and beyond.
+        </p>
+        <div class="w-10 h-0.5 bg-warmLinen mx-auto mt-4"></div>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-12">
+        <button onclick="filterGuideCards('all', this)" class="guide-btn px-4 py-1.5 bg-deepOlive text-softEcru editorial-label text-[10px] rounded-xs transition">All Guides</button>
+        <button onclick="filterGuideCards('city', this)" class="guide-btn px-4 py-1.5 bg-lightLinen text-darkCharcoal hover:bg-warmLinen editorial-label text-[10px] rounded-xs transition">City Guides</button>
+        <button onclick="filterGuideCards('weekend', this)" class="guide-btn px-4 py-1.5 bg-lightLinen text-darkCharcoal hover:bg-warmLinen editorial-label text-[10px] rounded-xs transition">Weekend Trips</button>
+        <button onclick="filterGuideCards('road', this)" class="guide-btn px-4 py-1.5 bg-lightLinen text-darkCharcoal hover:bg-warmLinen editorial-label text-[10px] rounded-xs transition">Road Trips</button>
+        <button onclick="filterGuideCards('coast', this)" class="guide-btn px-4 py-1.5 bg-lightLinen text-darkCharcoal hover:bg-warmLinen editorial-label text-[10px] rounded-xs transition">Coastal Paths</button>
+      </div>
+
+      <!-- 6 Guide Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Guide 1: Kyoto -->
+        <div class="guide-item group cursor-pointer" data-cat="city" onclick="switchView('article')">
+          <div class="aspect-[4/5] bg-warmLinen rounded-sm overflow-hidden mb-4 shadow-subtle">
+            <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800&auto=format&fit=crop" alt="Kyoto Zen garden" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <span class="editorial-label text-[10px] text-terracotta">City Guide</span>
+          <h3 class="font-serif text-xl text-darkCharcoal group-hover:text-deepOlive transition mt-1">48 Hours in Kyoto</h3>
+          <p class="font-sans text-xs text-darkCharcoal/70 mt-1">Temple moss gardens, tranquil matcha houses, and evening walks along Kamo River.</p>
+        </div>
+
+        <!-- Guide 2: Lake Como -->
+        <div class="guide-item group cursor-pointer" data-cat="weekend" onclick="switchView('article')">
+          <div class="aspect-[4/5] bg-warmLinen rounded-sm overflow-hidden mb-4 shadow-subtle">
+            <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=800&auto=format&fit=crop" alt="Lake Como villas" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <span class="editorial-label text-[10px] text-deepOlive">Weekend Trip</span>
+          <h3 class="font-serif text-xl text-darkCharcoal group-hover:text-deepOlive transition mt-1">Three Days in Lake Como</h3>
+          <p class="font-sans text-xs text-darkCharcoal/70 mt-1">Historic botanical villas, private wooden boat hire, and dining on the water in Varenna.</p>
+        </div>
+
+        <!-- Guide 3: Best Cafes in Paris -->
+        <div class="guide-item group cursor-pointer" data-cat="city" onclick="switchView('article')">
+          <div class="aspect-[4/5] bg-warmLinen rounded-sm overflow-hidden mb-4 shadow-subtle">
+            <img src="https://images.unsplash.com/photo-1509114397022-ed747cca3f65?q=80&w=800&auto=format&fit=crop" alt="Parisian café chairs" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <span class="editorial-label text-[10px] text-terracotta">City Guide</span>
+          <h3 class="font-serif text-xl text-darkCharcoal group-hover:text-deepOlive transition mt-1">The Best Cafés in Paris</h3>
+          <p class="font-sans text-xs text-darkCharcoal/70 mt-1">From third-wave specialty roasters in the 11th to 19th-century zinc counters in Saint-Germain.</p>
+        </div>
+
+        <!-- Guide 4: Tuscany in Autumn -->
+        <div class="guide-item group cursor-pointer" data-cat="road" onclick="switchView('article')">
+          <div class="aspect-[4/5] bg-warmLinen rounded-sm overflow-hidden mb-4 shadow-subtle">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=800&auto=format&fit=crop" alt="Tuscan cypress trees" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <span class="editorial-label text-[10px] text-softSage">Road Trip</span>
+          <h3 class="font-serif text-xl text-darkCharcoal group-hover:text-deepOlive transition mt-1">Tuscany in Autumn</h3>
+          <p class="font-sans text-xs text-darkCharcoal/70 mt-1">Olive harvest seasons, rustic stone agriturismi, and crisp morning fog across Val d’Orcia.</p>
+        </div>
+
+        <!-- Guide 5: Bangkok Beyond Temples -->
+        <div class="guide-item group cursor-pointer" data-cat="city" onclick="switchView('article')">
+          <div class="aspect-[4/5] bg-warmLinen rounded-sm overflow-hidden mb-4 shadow-subtle">
+            <img src="https://images.unsplash.com/photo-1508009603885-50cf7c579365?q=80&w=800&auto=format&fit=crop" alt="Bangkok riverside" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <span class="editorial-label text-[10px] text-deepOlive">City Guide</span>
+          <h3 class="font-serif text-xl text-darkCharcoal group-hover:text-deepOlive transition mt-1">Bangkok Beyond the Temples</h3>
+          <p class="font-sans text-xs text-darkCharcoal/70 mt-1">Canal-side wooden tea galleries, Talat Noi creative quarter, and silent alleyway cafés.</p>
+        </div>
+
+        <!-- Guide 6: Cornwall Coastal Walks -->
+        <div class="guide-item group cursor-pointer" data-cat="coast" onclick="switchView('article')">
+          <div class="aspect-[4/5] bg-warmLinen rounded-sm overflow-hidden mb-4 shadow-subtle">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=800&auto=format&fit=crop" alt="Cornwall coastal path meadow sign" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+          </div>
+          <span class="editorial-label text-[10px] text-terracotta">Coastal Walk</span>
+          <h3 class="font-serif text-xl text-darkCharcoal group-hover:text-deepOlive transition mt-1">Cornwall Coastal Walks</h3>
+          <p class="font-sans text-xs text-darkCharcoal/70 mt-1">Salt breezes along the Lizard Peninsula, tidal harbors, and cozy pubs with wood fires.</p>
+        </div>
+
+      </div>
+
+    </div><!-- End #view-guides -->
+
+    <!-- ============================================================= -->
+    <!-- VIEW 5: ABOUT THERESA                                         -->
+    <!-- ============================================================= -->
+    <div id="view-about" class="view-pane hidden py-20 sm:py-28 max-w-5xl mx-auto px-6 sm:px-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center bg-lightLinen/60 p-8 sm:p-14 rounded-sm border border-warmLinen">
+        
+        <!-- Portrait matching Theresa in mockup -->
+        <div class="md:col-span-5">
+          <div class="relative aspect-[3/4] bg-warmLinen rounded-sm overflow-hidden shadow-editorial">
+            <img 
+              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop" 
+              alt="Theresa looking across Tuscan hills"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        <!-- Bio text -->
+        <div class="md:col-span-7">
+          <div class="flex items-center gap-2 text-deepOlive mb-3">
+            <span class="w-2 h-2 rounded-full bg-terracotta"></span>
+            <span class="editorial-label text-deepOlive">Founder & Landscape Architect</span>
+          </div>
+
+          <h1 class="font-serif text-4xl sm:text-5xl text-darkCharcoal font-normal mb-6">
+            Hi, I&rsquo;m Theresa.
+          </h1>
+
+          <div class="space-y-4 text-darkCharcoal/80 font-sans text-sm leading-relaxed font-light">
+            <p>
+              I&rsquo;m a landscape architect with a love for thoughtful travel, good food and places designed for people.
+            </p>
+            <p>
+              Where We Linger grew from the belief that every destination has a story &mdash; and the best way to discover it is by slowing down, noticing the light, and giving ourselves permission to sit at an outdoor table for hours.
+            </p>
+            <p>
+              I spend my days researching vernacular stone architecture, visiting family-run ceramic ateliers, and tasting pasta sauces in tiny Mediterranean villages.
+            </p>
+          </div>
+
+          <div class="mt-8 pt-6 border-t border-warmLinen flex flex-wrap gap-4 items-center">
+            <button onclick="switchView('home')" class="px-6 py-2.5 bg-deepOlive text-softEcru hover:bg-deepOlive/90 editorial-label text-[10px] rounded-xs transition">
+              Explore The Stories
+            </button>
+            <a href="mailto:theresa@wherewelinger.com" class="px-6 py-2.5 border border-darkCharcoal/40 text-darkCharcoal hover:border-darkCharcoal editorial-label text-[10px] rounded-xs transition">
+              Say Hello
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- End #view-about -->
+
+  </main>
+
+  <!-- Newsletter Section: Styled in Deep Olive (#3F4A3A) and Soft Ecru (#E8E5DF) -->
+  <section id="newsletter" class="bg-deepOlive text-softEcru py-20 px-6 sm:px-10 relative overflow-hidden">
+    <!-- Delicate Botanical SVG Watermark motif -->
+    <div class="absolute right-[-40px] top-[-30px] opacity-15 pointer-events-none w-96 h-96 text-warmLinen">
+      <svg viewBox="0 0 200 200" fill="none" stroke="currentColor">
+        <path d="M40 180 Q 90 120, 160 40" stroke-width="2"/>
+        <path d="M120 80 Q 150 70, 160 40 Q 130 50, 120 80 Z" fill="currentColor" fill-opacity="0.3"/>
+        <path d="M80 130 Q 110 110, 130 90 Q 100 110, 80 130 Z" fill="currentColor" fill-opacity="0.3"/>
+        <path d="M60 160 Q 90 150, 100 130 Q 80 145, 60 160 Z" fill="currentColor" fill-opacity="0.3"/>
+        <path d="M140 60 Q 170 60, 180 30 Q 150 40, 140 60 Z" fill="currentColor" fill-opacity="0.3"/>
+      </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
+      <div class="lg:col-span-7">
+        <span class="editorial-label text-softSage block mb-2">Monthly Dispatch</span>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-parchmentBg font-normal mb-3">
+          Stay a Little Longer
+        </h2>
+        <p class="font-sans text-softEcru/85 text-xs sm:text-sm max-w-xl leading-relaxed font-light">
+          Once a month, I share a new story, a memorable meal, and a place worth lingering in. No rush &mdash; just thoughtful inspiration delivered quietly to your inbox.
+        </p>
+      </div>
+
+      <div class="lg:col-span-5">
+        <form onsubmit="handleSubscribe(event)" class="flex flex-col sm:flex-row gap-2">
+          <input 
+            type="email" 
+            id="sub-email"
+            required
+            placeholder="YOUR EMAIL ADDRESS" 
+            class="w-full bg-deepOlive/80 border border-softSage/40 px-4 py-3 text-xs text-white placeholder:text-softEcru/40 focus:outline-none focus:border-warmLinen font-sans rounded-xs uppercase tracking-wider"
+          >
+          <button 
+            type="submit" 
+            class="px-6 py-3 bg-warmLinen text-deepOlive font-sans text-xs uppercase tracking-[0.18em] font-semibold hover:bg-parchmentBg transition whitespace-nowrap rounded-xs"
+          >
+            Subscribe
+          </button>
+        </form>
+        <span class="block mt-2 text-[10px] font-sans text-softEcru/60">Zero noise. Unsubscribe with one click anytime.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer with Brand Notes and Color Swatches -->
+  <footer class="bg-lightLinen border-t border-warmLinen py-16 px-6 sm:px-10 text-darkCharcoal">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 mb-14">
+        
+        <!-- Col 1: Brand & Statement -->
+        <div class="md:col-span-4">
+          <span class="font-serif tracking-[0.2em] text-2xl uppercase font-normal text-darkCharcoal block mb-1">Where We Linger</span>
+          <p class="editorial-label text-terracotta mb-4">Stories of food, travel and the landscapes between.</p>
+          <p class="font-sans text-xs text-darkCharcoal/70 leading-relaxed max-w-sm mb-5 font-light">
+            A slow travel journal celebrating the art of pausing, shared tables, vernacular architecture, and destinations that ask us to stay.
+          </p>
+          <!-- Social Icons -->
+          <div class="flex items-center gap-4 text-deepOlive">
+            <a href="https://pinterest.com" target="_blank" rel="noopener" class="hover:text-terracotta transition" aria-label="Pinterest">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0a12 12 0 00-4.37 23.18c-.03-.98-.06-2.5.06-3.57.11-.98.71-6.14.71-6.14s-.18-.36-.18-.9c0-.84.49-1.47 1.09-1.47.51 0 .76.39.76.85 0 .52-.33 1.29-.5 2.01-.14.61.3 1.1 1 1.1 1.21 0 2.14-1.27 2.14-3.11 0-1.63-1.17-2.77-2.84-2.77-1.93 0-3.07 1.45-3.07 2.95 0 .58.22 1.21.5 1.55.05.07.06.13.04.2-.06.24-.19.78-.22.88-.03.14-.11.17-.26.1-1-.46-1.62-1.91-1.62-3.08 0-2.51 1.82-4.81 5.26-4.81 2.76 0 4.9 1.97 4.9 4.6 0 2.74-1.73 4.95-4.13 4.95-.81 0-1.57-.42-1.83-.92l-.5 1.9c-.18.7-.67 1.57-.99 2.1A12 12 0 1012 0z"/></svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="hover:text-terracotta transition" aria-label="Instagram">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="mailto:hello@wherewelinger.com" class="hover:text-terracotta transition" aria-label="Email">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Explore -->
+        <div class="md:col-span-2">
+          <h3 class="editorial-label text-deepOlive mb-4 font-semibold">Explore</h3>
+          <ul class="space-y-2 font-sans text-xs text-darkCharcoal/70">
+            <li><a href="#stories" onclick="ensureHomeThenScroll('#stories')" class="hover:text-terracotta transition">Stories</a></li>
+            <li><a href="#themes" onclick="ensureHomeThenScroll('#themes')" class="hover:text-terracotta transition">Food & Recipes</a></li>
+            <li><a href="#themes" onclick="ensureHomeThenScroll('#themes')" class="hover:text-terracotta transition">Slow Travel</a></li>
+            <li><a href="#vignettes" onclick="ensureHomeThenScroll('#vignettes')" class="hover:text-terracotta transition">Moodboard</a></li>
+            <li><a href="javascript:void(0)" onclick="switchView('guides')" class="hover:text-terracotta transition">City Guides</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Information -->
+        <div class="md:col-span-3">
+          <h3 class="editorial-label text-deepOlive mb-4 font-semibold">Information</h3>
+          <ul class="space-y-2 font-sans text-xs text-darkCharcoal/70">
+            <li><a href="javascript:void(0)" onclick="switchView('about')" class="hover:text-terracotta transition">About Theresa</a></li>
+            <li><a href="javascript:void(0)" onclick="switchView('fieldnotes')" class="hover:text-terracotta transition">Field Notes Journal</a></li>
+            <li><a href="javascript:void(0)" onclick="showNotification('Inquiries: collaborate@wherewelinger.com')" class="hover:text-terracotta transition">Work With Us</a></li>
+            <li><a href="javascript:void(0)" onclick="showNotification('Ethics: All trips self-funded.')" class="hover:text-terracotta transition">Editorial Ethics</a></li>
+            <li><a href="javascript:void(0)" onclick="showNotification('Privacy: Your data is never sold.')" class="hover:text-terracotta transition">Privacy & Terms</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Small Botanical Preview Card -->
+        <div class="md:col-span-3">
+          <div class="p-3 bg-parchmentBg rounded-sm border border-warmLinen shadow-subtle flex items-center gap-3 cursor-pointer group" onclick="switchView('article')">
+            <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=200&auto=format&fit=crop" alt="Kew arch" class="w-16 h-16 object-cover rounded-xs">
+            <div>
+              <span class="editorial-label text-[9px] text-softSage block">Featured Read</span>
+              <p class="font-serif text-xs text-darkCharcoal group-hover:text-terracotta transition leading-tight">The Quiet Beauty of Kew</p>
+              <span class="editorial-label text-[9px] text-deepOlive mt-1 inline-block">&rarr; Read Dispatch</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Color Palette Specifier Strip matching the mood board swatch -->
+      <div class="pt-8 border-t border-warmLinen flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-sans text-darkCharcoal/60">
+        <div class="flex flex-wrap items-center gap-4">
+          <span class="editorial-label text-[10px] text-deepOlive">Palette in use:</span>
+          <span class="inline-flex items-center gap-1.5" title="Deep Olive"><span class="w-3.5 h-3.5 rounded-full bg-[#3F4A3A]"></span> #3F4A3A</span>
+          <span class="inline-flex items-center gap-1.5" title="Soft Sage"><span class="w-3.5 h-3.5 rounded-full bg-[#A2AE97]"></span> #A2AE97</span>
+          <span class="inline-flex items-center gap-1.5" title="Warm Linen"><span class="w-3.5 h-3.5 rounded-full bg-[#DCCDBA]"></span> #DCCDBA</span>
+          <span class="inline-flex items-center gap-1.5" title="Terracotta"><span class="w-3.5 h-3.5 rounded-full bg-[#C47A5A]"></span> #C47A5A</span>
+          <span class="inline-flex items-center gap-1.5" title="Soft Ecru"><span class="w-3.5 h-3.5 rounded-full bg-[#E8E5DF] border border-warmLinen"></span> #E8E5DF</span>
+          <span class="inline-flex items-center gap-1.5" title="Dark Charcoal"><span class="w-3.5 h-3.5 rounded-full bg-[#2B2B2B]"></span> #2B2B2B</span>
+        </div>
+        <p>&copy; 2026 Where We Linger &bull; Warm &bull; Timeless &bull; Curious &bull; Grounded &bull; Inviting</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Vignette Inspection Modal -->
+  <div id="vignette-modal" class="fixed inset-0 bg-deepOlive/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-parchmentBg border border-warmLinen max-w-xl w-full p-6 sm:p-8 rounded-sm shadow-editorial relative">
+      <button onclick="closeVignetteModal()" class="absolute top-4 right-4 text-darkCharcoal/50 hover:text-darkCharcoal text-2xl">&times;</button>
+      <span id="vignette-modal-tag" class="editorial-label text-terracotta block mb-1">Atmospheric Vignette</span>
+      <h3 id="vignette-modal-title" class="font-serif text-3xl text-darkCharcoal mb-3">Vignette Detail</h3>
+      <div class="aspect-[16/10] bg-warmLinen rounded-sm overflow-hidden mb-4 shadow-subtle">
+        <img id="vignette-modal-img" src="" alt="Vignette detail" class="w-full h-full object-cover">
+      </div>
+      <p id="vignette-modal-desc" class="font-sans text-xs sm:text-sm text-darkCharcoal/80 leading-relaxed mb-4">Description...</p>
+      <div class="flex items-center justify-between pt-3 border-t border-warmLinen">
+        <span id="vignette-modal-mood" class="font-script text-xl text-deepOlive">mood note</span>
+        <button onclick="closeVignetteModal(); switchView('article');" class="editorial-label text-xs text-terracotta hover:underline">
+          Read Associated Story &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Modal -->
+  <div id="search-modal" class="fixed inset-0 bg-deepOlive/60 backdrop-blur-sm z-50 hidden flex items-start justify-center pt-24 px-4">
+    <div class="bg-parchmentBg border border-warmLinen max-w-xl w-full p-6 sm:p-8 rounded-sm shadow-editorial relative">
+      <button onclick="toggleSearchModal()" class="absolute top-4 right-4 text-darkCharcoal/60 hover:text-darkCharcoal text-2xl">&times;</button>
+      <span class="editorial-label text-softSage block mb-2">Search Stories & Field Notes</span>
+      <input type="text" onkeyup="filterLiveSearch(this.value)" placeholder="Search destinations, meals, moods (e.g. Positano, Pasta, Cypress)..." class="w-full bg-white border border-warmLinen px-4 py-3 text-xs uppercase tracking-wider font-sans focus:outline-none focus:border-deepOlive rounded-xs">
+      <div id="search-results-list" class="mt-4 max-h-60 overflow-y-auto divide-y divide-warmLinen/60 text-xs">
+        <p class="text-darkCharcoal/60 py-2 italic font-sans">Type any keyword above to search through our journal dispatches.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification element -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-deepOlive text-softEcru px-5 py-3 rounded-xs shadow-editorial text-xs font-sans tracking-wide transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2">
+    <span class="w-2 h-2 rounded-full bg-softSage"></span>
+    <span id="toast-text">Notification message</span>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // 8 Vignettes data from brand moodboard
+    const vignettesData = [
+      {
+        tag: "Vignette I &bull; Campania Coast",
+        title: "Positano Golden Hour",
+        img: "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=85&w=1200&auto=format&fit=crop",
+        desc: "Steep pastel houses glowing amber as the evening sun descends into the blue Tyrrhenian. A celebration of light, sea breezes, and unhurried village hours.",
+        mood: "warm afternoon golden light"
+      },
+      {
+        tag: "Vignette II &bull; European Promenade",
+        title: "Dappled Tree Promenade",
+        img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=85&w=1200&auto=format&fit=crop",
+        desc: "Cast iron benches nestled beneath leafy plane trees, where gentle midday breezes scatter soft leaf shadows across clean gravel pathways.",
+        mood: "quiet shadows & strolling"
+      },
+      {
+        tag: "Vignette III &bull; Oltrarno Table",
+        title: "Handmade Pasta & Wine Flat Lay",
+        img: "https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=85&w=1200&auto=format&fit=crop",
+        desc: "A top-down view of a classic trattoria table: textured handmade tagliatelle, green Tuscan olive oil in ceramic saucers, a stemmed glass of white wine, and wrinkled natural linen.",
+        mood: "table laid with care"
+      },
+      {
+        tag: "Vignette IV &bull; Val d’Orcia",
+        title: "Rolling Tuscan Cypress Hills",
+        img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=85&w=1200&auto=format&fit=crop",
+        desc: "Golden undulating wheat hills crowned by silhouettes of ancient cypress trees, bathed in the soft haze of early morning light.",
+        mood: "timeless horizon"
+      },
+      {
+        tag: "Vignette V &bull; Earth & Texture",
+        title: "Terracotta Urns & Olive Stems",
+        img: "https://images.unsplash.com/photo-1544025162-d76694265947?q=85&w=1200&auto=format&fit=crop",
+        desc: "Rustic terracotta jars holding fresh olive cuttings, casting botanical branch silhouettes against sun-baked limewash plaster.",
+        mood: "grounded earth & pottery"
+      },
+      {
+        tag: "Vignette VI &bull; Tactile Journaling",
+        title: "Vintage Linen Field Notes",
+        img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=85&w=1200&auto=format&fit=crop",
+        desc: "Rough linen book cover stamped with 'FIELD NOTES' beside a brass fountain pen. The tangible practice of recording quiet observations on heavy paper.",
+        mood: "slow intentional writing"
+      },
+      {
+        tag: "Vignette VII &bull; Lakeside Sanctuary",
+        title: "Rustic Casement Lake Window",
+        img: "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=85&w=1200&auto=format&fit=crop",
+        desc: "Weathered wooden casement windows flung wide open to the alpine lake breeze. Two simple iron chairs waiting for morning coffee and silent contemplation.",
+        mood: "lingering morning gaze"
+      },
+      {
+        tag: "Vignette VIII &bull; Meadow Wayfinding",
+        title: "Coast Path & Café Signpost",
+        img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=85&w=1200&auto=format&fit=crop",
+        desc: "Weathered timber trail signs ('COAST PATH', 'VIEWPOINT', 'CAFÉ') settled amongst tall grass, oxeye daisies, and soft coastal breezes.",
+        mood: "wandering without rush"
+      }
+    ];
+
+    // Interactive Map Pin Data
+    const mapLocations = {
+      positano: {
+        region: "Campania • Italy",
+        season: "May – October",
+        title: "Afternoon Light in Positano",
+        desc: "Steep cliffside stairs, fragrant lemon groves, and the luminous pink and amber glow falling across the Tyrrhenian sea."
+      },
+      como: {
+        region: "Lombardy • Italy",
+        season: "April – October",
+        title: "A Weekend in Lake Como",
+        desc: "Silent mornings beside mountain waters, Belle Époque villas in Bellagio, and slow wooden ferry rides."
+      },
+      florence: {
+        region: "Tuscany • Italy",
+        season: "All Year Round",
+        title: "Osterias of Florence & Val d'Orcia",
+        desc: "Vaulted cellars serving hand-rolled wild boar pappardelle, olive harvests, and winding roads bordered by cypress trees."
+      },
+      paris: {
+        region: "Île-de-France • France",
+        season: "Spring & Autumn",
+        title: "Slow Cafés of Paris",
+        desc: "Corner rattan wicker chairs, morning café crème, and unhurried afternoons browsing riverside bouquinistes along the Seine."
+      },
+      kew: {
+        region: "Surrey & Cornwall • UK",
+        season: "May – September",
+        title: "Victorian Botany & Coastal Paths",
+        desc: "Victorian ironwork glasshouses at Kew Gardens and wild gorse sea walks along the Lizard Peninsula."
+      },
+      kyoto: {
+        region: "Kansai • Japan",
+        season: "October – November & April",
+        title: "Kyoto Moss & Tea Pavilions",
+        desc: "Quiet northern temples, glowing amber maples, and the slow ritual of roasted sencha in stone courtyards."
+      }
+    };
+
+    // Story Index for search
+    const searchableStories = [
+      { title: "Afternoon Light in Positano", cat: "Travel &bull; Italy" },
+      { title: "A Weekend in Lake Como", cat: "Travel &bull; Lake" },
+      { title: "The Best Pasta I Ate in Florence", cat: "Food &bull; Tuscany" },
+      { title: "The Quiet Beauty of Kew Gardens", cat: "Landscape &bull; Botany" },
+      { title: "48 Hours in Kyoto", cat: "City Guide &bull; Japan" },
+      { title: "Cornwall Coastal Walks & Meadow Paths", cat: "Travel &bull; Coast" },
+      { title: "Tuscany in Autumn & Cypress Ridges", cat: "Road Trip &bull; Italy" }
+    ];
+
+    // View Switching Logic
+    function switchView(viewKey) {
+      document.querySelectorAll('.view-pane').forEach(el => el.classList.add('hidden'));
+      const activePane = document.getElementById(`view-${viewKey}`);
+      if (activePane) {
+        activePane.classList.remove('hidden');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function ensureHomeThenScroll(selector) {
+      switchView('home');
+      setTimeout(() => {
+        const target = document.querySelector(selector);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }, 80);
+    }
+
+    // Toggle Mobile Navigation
+    function toggleMobileNav() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Vignette Modal handlers
+    function openVignetteModal(index) {
+      const data = vignettesData[index];
+      if (!data) return;
+
+      document.getElementById('vignette-modal-tag').innerHTML = data.tag;
+      document.getElementById('vignette-modal-title').textContent = data.title;
+      document.getElementById('vignette-modal-img').src = data.img;
+      document.getElementById('vignette-modal-desc').textContent = data.desc;
+      document.getElementById('vignette-modal-mood').textContent = data.mood;
+
+      document.getElementById('vignette-modal').classList.remove('hidden');
+    }
+
+    function closeVignetteModal() {
+      document.getElementById('vignette-modal').classList.add('hidden');
+    }
+
+    // Interactive Map Pin updater
+    function setMapPin(key) {
+      const data = mapLocations[key];
+      if (!data) return;
+
+      // Reset pin glowing classes
+      ['positano', 'como', 'florence', 'paris', 'kew', 'kyoto'].forEach(k => {
+        const dot = document.getElementById(`pin-dot-${k}`);
+        if (dot) {
+          dot.classList.remove('pin-active-glow', 'bg-terracotta');
+          dot.classList.add('bg-deepOlive');
+        }
+      });
+
+      const activeDot = document.getElementById(`pin-dot-${key}`);
+      if (activeDot) {
+        activeDot.classList.add('pin-active-glow', 'bg-terracotta');
+        activeDot.classList.remove('bg-deepOlive');
+      }
+
+      const card = document.getElementById('map-pin-card');
+      card.classList.add('opacity-40');
+      setTimeout(() => {
+        document.getElementById('pin-card-region').innerHTML = data.region;
+        document.getElementById('pin-card-season').textContent = data.season;
+        document.getElementById('pin-card-title').textContent = data.title;
+        document.getElementById('pin-card-desc').textContent = data.desc;
+        card.classList.remove('opacity-40');
+      }, 150);
+    }
+
+    // Guides Filter
+    function filterGuideCards(category, btn) {
+      document.querySelectorAll('.guide-btn').forEach(b => {
+        b.classList.remove('bg-deepOlive', 'text-softEcru');
+        b.classList.add('bg-lightLinen', 'text-darkCharcoal');
+      });
+      btn.classList.add('bg-deepOlive', 'text-softEcru');
+      btn.classList.remove('bg-lightLinen', 'text-darkCharcoal');
+
+      document.querySelectorAll('.guide-item').forEach(card => {
+        if (category === 'all' || card.getAttribute('data-cat') === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function filterByTopic(topic) {
+      showNotification(`Filtered by topic: ${topic}`);
+      switchView('guides');
+    }
+
+    // Search Modal toggling & live search
+    function toggleSearchModal() {
+      const modal = document.getElementById('search-modal');
+      modal.classList.toggle('hidden');
+    }
+
+    function filterLiveSearch(query) {
+      const box = document.getElementById('search-results-list');
+      if (!query.trim()) {
+        box.innerHTML = '<p class="text-darkCharcoal/60 py-2 italic font-sans">Type any keyword above to search through our journal dispatches.</p>';
+        return;
+      }
+      const matches = searchableStories.filter(s => s.title.toLowerCase().includes(query.toLowerCase()) || s.cat.toLowerCase().includes(query.toLowerCase()));
+      if (matches.length === 0) {
+        box.innerHTML = `<p class="py-3 text-darkCharcoal/60">No dispatches found for "${query}".</p>`;
+      } else {
+        box.innerHTML = matches.map(m => `
+          <div onclick="switchView('article'); toggleSearchModal();" class="py-2.5 px-2 hover:bg-warmLinen/40 cursor-pointer flex items-center justify-between transition">
+            <div>
+              <span class="font-serif text-sm text-darkCharcoal block">${m.title}</span>
+              <span class="editorial-label text-[9px] text-terracotta">${m.cat}</span>
+            </div>
+            <span class="text-deepOlive">&rarr;</span>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Newsletter handling
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const email = document.getElementById('sub-email').value;
+      if (email) {
+        showNotification(`Thank you. We have sent a quiet confirmation to ${email}`);
+        document.getElementById('sub-email').value = '';
+      }
+    }
+
+    // Ambient Drone Synthesizer via Web Audio API (No external sound files required)
+    let audioCtx = null;
+    let isAmbiencePlaying = false;
+    let osc1 = null, osc2 = null, gainNode = null;
+
+    function toggleAudioAmbience() {
+      const indicator = document.getElementById('ambience-indicator');
+      const text = document.getElementById('ambience-text');
+
+      if (!isAmbiencePlaying) {
+        try {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          audioCtx = new AudioContext();
+
+          // Soft sinusoidal harmonic tones mimicking gentle breeze and distant water drone
+          osc1 = audioCtx.createOscillator();
+          osc2 = audioCtx.createOscillator();
+          gainNode = audioCtx.createGain();
+
+          osc1.type = 'sine';
+          osc1.frequency.setValueAtTime(130.81, audioCtx.currentTime); // C3 warm drone
+
+          osc2.type = 'sine';
+          osc2.frequency.setValueAtTime(196.00, audioCtx.currentTime); // G3 harmonic
+
+          gainNode.gain.setValueAtTime(0.001, audioCtx.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.04, audioCtx.currentTime + 3);
+
+          osc1.connect(gainNode);
+          osc2.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+
+          osc1.start();
+          osc2.start();
+
+          isAmbiencePlaying = true;
+          indicator.classList.remove('bg-softSage');
+          indicator.classList.add('bg-emerald-400', 'animate-pulse');
+          text.textContent = 'Lake & Meadow Ambience: Playing';
+          showNotification('Ambient soundscapes active (gentle breeze drone)');
+        } catch (err) {
+          showNotification('Web Audio not enabled on this device');
+        }
+      } else {
+        if (gainNode && audioCtx) {
+          gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1);
+          setTimeout(() => {
+            if (osc1) osc1.stop();
+            if (osc2) osc2.stop();
+            if (audioCtx) audioCtx.close();
+            isAmbiencePlaying = false;
+          }, 1000);
+        }
+        indicator.classList.remove('bg-emerald-400', 'animate-pulse');
+        indicator.classList.add('bg-softSage');
+        text.textContent = 'Lake & Meadow Ambience: Off';
+        showNotification('Ambient soundscapes paused');
+      }
+    }
+
+    // Toast Notification utility
+    function showNotification(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-text');
+      text.textContent = msg;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3400);
+    }
+
+    // Escape listener for dialogs
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeVignetteModal();
+        const searchM = document.getElementById('search-modal');
+        if (!searchM.classList.contains('hidden')) searchM.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
